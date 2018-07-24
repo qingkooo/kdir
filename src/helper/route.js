@@ -1,14 +1,14 @@
 const path = require('path');
 const fs = require('fs');
-const promisify = require('util').promisify;
 const handlebars = require('handlebars');	// 服务器模版
+const promisify = require('util').promisify;
+const stat = promisify(fs.stat);
+const readdir = promisify(fs.readdir);
 const tpl = fs.readFileSync(path.resolve('src/template/dir.tpl'),'utf8');	// 自定义模版
 const mime = require('./mime.js');	// mime类型值
 const compress = require('./compress.js');	// 服务器压缩
-const stat = promisify(fs.stat);
-const readdir = promisify(fs.readdir);
-const range = require('./range.js');
-const cache = require('./cache');
+const range = require('./range.js');	// 文档内容范围
+const cache = require('./cache');	// 缓存
 
 module.exports = async function (req, res , cfg) {
 	const filepath = path.join(cfg.root,req.url);
@@ -44,19 +44,19 @@ module.exports = async function (req, res , cfg) {
 			rs.pipe(res);
 		}else{
 			const files = await readdir(filepath);
-			res.statusCode = 200;
-			res.setHeader('Content-Type','text/html');
 			const template = handlebars.compile(tpl);
 			const dir = path.relative(cfg.root,filepath);
 			const html = template({
 				title: path.basename(filepath),
+				root: cfg.root,
 				files,
 				dir: dir ? `/${dir}` : ''
 			});
+			res.statusCode = 200;
+			res.setHeader('Content-Type','text/html');
 			res.end(html);
 		}
 	}catch(err){
-		console.log('错误：');
 		res.statusCode = 404;
 		res.setHeader('Content-Type','text/plain');
 		res.end(`${filepath} is not File or Directory. \n ${err.toString()}`);
