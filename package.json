@@ -1,7 +1,16 @@
 {
     "name": "kdir",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "tiny static web server written by nodejs",
+	"keywords": [
+		"web",
+		"server",
+		"static",
+		"resource",
+		"cli",
+		"mini",
+		"tool"
+	],
     "bin": "bin/kdir.js",
     "main": "src/app.js",
     "scripts": {

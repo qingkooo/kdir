@@ -9,6 +9,8 @@
 
 ```cmd
 npm i -g kdir
+// 若遇到permissions相关问题，加上sudo
+sudo npm i -g kdir
 ```
 
 #### 使用说明
