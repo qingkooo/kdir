@@ -29,14 +29,14 @@
     "license": "MIT",
     "devDependencies": {
         "babel-cli": "^6.26.0",
-        "babel-eslint": "^8.2.6",
+        "babel-eslint": "^10.1.0",
         "babel-preset-env": "^1.7.0",
-        "eslint": "^5.1.0",
+        "eslint": "^7.11.0",
         "pre-commit": "^1.2.2"
     },
     "dependencies": {
-		"chalk": "^2.4.1",
-        "handlebars": "^4.0.11",
-        "yargs": "^12.0.1"
+		"chalk": "^4.1.0",
+        "handlebars": "^4.7.6",
+        "yargs": "^16.1.0"
     }
 }
